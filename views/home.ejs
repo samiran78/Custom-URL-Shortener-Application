@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing:content-box;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input {
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #4CAF50;
+        }
+
+        button {
+            padding: 12px;
+            font-size: 16px;
+            background: #7403c0;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #d3a903;
+        }
+
+        .table-container {
+    width: 100%;
+    overflow-x: auto;  /* Enables horizontal scrolling */
+    padding: 10px;
+}
+
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <% if (locals. Id) { %>
+            <p>URL Generated:
+                <a href="http://localhost:5500/url/<%= Id %>">
+                    http://localhost:5500/url/<%= Id %>
+                </a>
+            </p>
+            <% } %>
+
+                <h1>🔗 URL Shortener</h1>
+                <p>Paste the URL below to generate a short link:</p>
+                <form method="post" action="/url">
+                    <input type="text" name="url" placeholder="https://example.com" required />
+                    <button type="submit">Generate your Shorten URL🫰🏽</button>
+                </form>
+                <div class="table-container">
+                    <% if (locals.allurals) { %>
+                        <h2>Generated URLs</h2>
+                        <table>
+                            <thead>
+                                <th>serail. no</th>
+                                <th>shortId</th>
+                                <th>redirect_URL</th>
+                                <th>totalClicksHistory</th>
+
+                            </thead>
+
+                            <tbody>
+                                <% allurals.forEach((allural,index)=>{ %>
+                                    <tr>
+                                        <td>
+                                            <%= index+1%>
+                                        </td>
+                                        <td>
+                                            <%= allural.shortId%>
+                                        </td>
+                                        <td>
+                                            <%= allural.redirectUrl %>
+                                        </td>
+                                        <td>
+                                            <%= allural.totalClicksHistory.length%>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+                        <% } %>
+
+                </div>
+
+    </div>
+    </div>
+
+
+</body>
+
+</html>
